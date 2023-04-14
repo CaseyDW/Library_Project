@@ -10,6 +10,24 @@ const books = [
         author: "Patrick Rothfuss",
         read: true,
     },
+    {
+        id: 2,
+        title: "Name of the Wind",
+        author: "Patrick Rothfuss",
+        read: true,
+    },
+    {
+        id: 3,
+        title: "Name of the Wind",
+        author: "Patrick Rothfuss",
+        read: true,
+    },
+    {
+        id: 4,
+        title: "Name of the Wind",
+        author: "Patrick Rothfuss",
+        read: true,
+    },
 ];
 
 class Book {
@@ -28,19 +46,22 @@ class Library {
     }
 
     addBook(book) {
+        if (book) {
+        var { id, title, author, read } = book;
+        }
         if (!book) {
-         var title = document.getElementById("title");
-         var author = document.getElementsById("author");
-         var read = document.getElementById("read");
+         var titleInput = document.getElementById("title");
+         var authorInput = document.getElementById("author");
+         var readInput = document.getElementById("read");
 
         this.nextId++;
 
         
         var newBook = new Book(
             this.nextId, 
-            title.value, 
-            author.value, 
-            read.checked
+            titleInput.value, 
+            authorInput.value, 
+            readInput.checked
             );
     
 this.books.push(newBook);
@@ -48,23 +69,23 @@ this.books.push(newBook);
        
         const tbody = document.getElementById('tableBody');
         const newTr = document.createElement("tr");
-        newTr.classList.add(book ? book.id : newBook.id);
+        newTr.classList.add(id || newBook.id);
         newTr.addEventListener("dblclick", () => {
-        this.removeBook(book ? book.id : newBook.id);
+        this.removeBook(id || newBook.id);
         });
         const newTitle = document.createElement("td");
         const newAuthor = document.createElement("td");
         const newRead = document.createElement("td");
 
-        newTitle.textContent = book ? book.title : newBook.title;
-        newAuthor.textContent = book ? book.author : newBook.author;
+        newTitle.textContent = title || newBook.title;
+        newAuthor.textContent = author || newBook.author;
         const newCheckbox = document.createElement("input");
-        newCheckbox.classList.add(book ? book.id : newBook.id);
+        newCheckbox.classList.add(id || newBook.id);
         newCheckbox.type = "checkbox";
-        newCheckbox.checked = book ? book.read : read.checked;
-        newCheckbox.disabled = book ? book.read : read.checked;
+        newCheckbox.checked = read || readInput.checked;
+        newCheckbox.disabled = read || readInput.checked;
         newCheckbox.addEventListener("click", (event) => {
-        this.markRead(event.target, book ? book.id : newBook.id);
+        this.markRead(event.target, id || newBook.id);
       });
         newRead.appendChild(newCheckbox);
 
